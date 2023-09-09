@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+    <classpathentry kind="src" path=""/>
+    <classpathentry kind="lib" path="lib/java-cup-11b.jar"/> <!-- Substitua pelo caminho correto para o seu arquivo JAR -->
+    <classpathentry kind="lib" path="lib/java-cup-11b-runtime.jar"/> <!-- Substitua pelo caminho correto para o seu arquivo JAR -->
+    <classpathentry kind="output" path="bin"/>
+</classpath>

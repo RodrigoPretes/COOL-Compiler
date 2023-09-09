@@ -1,49 +1,46 @@
+package PAJ2;
+
+import PAJ2.TokenConstants;
+
 %%
 %class Lexer
-%type Token
+%type TokenConstants
 %line
 %column
-%{
-private Token token(Token.T type)
-{
-return new Token(type, yyline, yycolumn);
-}
-private Token token(Token.T type, Object val)
-{
-return new Token(type, val, yyline, yycolumn);
-}
-%}
+
 alpha = [a-zA-Z]
 dig = [0-9]
 id = {alpha} ({alpha} | {dig})*
 type_id = {alpha}{alpha}*
 int = {dig}+
+
+
 %%
-if { return token(Token.T.IF); }
-class { return new Token(Tag.CLASS, yytext());}
-else { return new Token(Tag.ELSE, yytext());}
-false { return new Token(Tag.FALSE, yytext());}
-fi { return new Token(Tag.FI, yytext());}
-in { return new Token(Tag.IN, yytext());}
-inherits { return new Token(Tag.INHERITS, yytext());}
-isvoid { return new Token(Tag.ISVOID, yytext());}
-let { return new Token(Tag.LET, yytext());}
-loop { return new Token(Tag.LOOP, yytext());}
-pool { return new Token(Tag.POOL, yytext());}
-then { return new Token(Tag.THEN, yytext());}
-while { return new Token(Tag.WHILE, yytext());}
-case { return new Token(Tag.CASE, yytext());}
-esac { return new Token(Tag.ESAC, yytext());}
-new { return new Token(Tag.NEW, yytext());}
-of { return new Token(Tag.OF, yytext());}
-not { return new Token(Tag.NOT, yytext());}
-true { return new Token(Tag.TRUE, yytext());}
-self { return new Token(Tag.SELF, yytext());}
-{id} { return new Token(Tag.ID, yytext()); }
-{int} { return new Token(Tag.INT, new Integer(yytext())); }
-{type_id} { return new Token(Tag.TYPE_ID, yytext());}
+if { Lexer = yytext(); return IF;}
+class { Lexer = yytext(); return CLASS;}
+else { Lexer = yytext(); return ELSE;}
+false { Lexer = yytext(); return FALSE;}
+fi { Lexer = yytext(); return FI;}
+in { Lexer = yytext(); return IN;}
+inherits { Lexer = yytext(); return INHERITS;}
+isvoid { Lexer = yytext(); return ISVOID;}
+let { Lexer = yytext(); return LET;}
+loop { Lexer = yytext(); return LOOP;}
+pool { Lexer = yytext(); return POOL;}
+then { Lexer = yytext(); return THEN;}
+while { Lexer = yytext(); return WHILE;}
+case { Lexer = yytext(); return CASE;}
+esac { Lexer = yytext(); return ESAC;}
+new { Lexer = yytext(); return NEW;}
+of { Lexer = yytext(); return OF;}
+not { Lexer = yytext(); return NOT;}
+true { Lexer = yytext(); return TRUE;}
+self { Lexer = yytext(); return SELF;}
+{id} { Lexer = yytext(); return ID; }
+{int} { Lexer = yytext(); return INT; }
+{type_id} { Lexer = yytext(); return TYPE_ID;}
 [ \t\n\r]+ { /* do nothing */ }
-<<EOF>> { return new Token(Tag.EOF); }
+//<<EOF>> { return new Token(Tag.EOF); }
 . { System.out.printf("error: unexpected char |%s|\n",
 yytext());
 }

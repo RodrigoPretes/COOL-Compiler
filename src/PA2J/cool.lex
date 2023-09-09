@@ -69,15 +69,112 @@ import java_cup.runtime.Symbol;
 %class CoolLexer
 %cup
 
+alpha = [a-zA-Z]
+dig = [0-9]
+id = {alpha} ({alpha} | {dig})*
+type_id = {alpha}{alpha}*
+int = {dig}+
+
 %%
 
-<YYINITIAL>"=>"			{ /* Sample lexical rule for "=>" arrow.
+<YYINITIAL>
+"=>"			{ /* Sample lexical rule for "=>" arrow.
                                      Further lexical rules should be defined
                                      here, after the last %% separator */
                                   return new Symbol(TokenConstants.DARROW); }
-
+"if" {
+    return new Symbol(TokenConstants.IF);
+}
+"class" {
+    return new Symbol(TokenConstants.CLASS);
+}
+"else" { 
+    return new Symobl(TokenConstants.ELSE);
+}
+"false" {
+    return new Symbol(TokenConstants.FALSE);
+}
+"fi" {
+    return new Symbol(TokenConstants.FI);
+}
+"in" {
+    return new Symbol(TokenConstants.IN);
+}
+"inherits" {
+    return new Symbol(TokenConstants.INHERITS);
+}
+"isvoid" {
+    return new Symbol(TokenConstants.ISVOID);
+}
+"let" {
+    return new Symbol(TokenConstants.LET);
+}
+"loop" {
+    return new Symbol(TokenConstants.LOOP);
+}
+"pool" {
+    return new Symbol(TokenConstants.POOL);
+}
+"then" {
+    return new Symbol(TokenConstants.THEN);
+}
+"while" {
+    return new Symbol(TokenConstants.WHILE);
+}
+"case" {
+    return new Symbol(TokenConstants.CASE);
+}
+"esac" {
+    return new Symbol(TokenConstants.ESAC);
+}
+"new" {
+    return new Symbol(TokenConstants.NEW);
+}
+"of" {
+    return new Symbol(TokenConstants.OF);
+}
+"not" {
+    return new Symbol(TokenConstants.NOT);
+}
+"true" {
+    return new Symbol(TokenConstants.TRUE);
+}
+"self" {
+    return new Symbol(TokenConstants.SELF);
+}
+"{id}" {
+    return new Symbol(TokenConstants.OBJECTID);
+}
+"{int}" {
+    return new Symbol(TokenConstants.INT_CONST);
+}
+"<EOF>" {
+    return new Symbol(TokenConstants.EOF);
+}
+"*" {
+    return new Symbol(TokenConstants.MULT);
+}
+"(" {
+    return new Symbol(TokenConstants.LPAREN);
+}
+")" {
+    return new Symbol(TokenConstants.RPAREN);
+}
+"/" {
+    return new Symbol(TokenConstants.DIV);
+}
+"+" {
+    return new Symbol(TokenConstants.PLUS);
+}
+"{" {
+    return new Symbol(TokenConstants.LBRACE);
+}
+"}" {
+    return new Symbol(TokenConstants.RBRACE);
+}
 .                               { /* This rule should be the very last
                                      in your lexical specification and
                                      will match match everything not
                                      matched by other lexical rules. */
                                   System.err.println("LEXER BUG - UNMATCHED: " + yytext()); }
+
